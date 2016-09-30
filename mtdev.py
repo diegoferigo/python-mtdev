@@ -17,7 +17,7 @@ from ctypes import cdll, Structure, c_ulong, c_int, c_ushort, \
 libmtdev = cdll.LoadLibrary('libmtdev.so.1')
 
 # from linux/input.h
-MTDEV_CODE_SLOT          = 0x2f  # MT slot being modified
+MTDEV_CODE_SLOT          = 0x2f    # MT slot being modified
 MTDEV_CODE_TOUCH_MAJOR   = 0x30    # Major axis of touching ellipse
 MTDEV_CODE_TOUCH_MINOR   = 0x31    # Minor axis (omit if circular)
 MTDEV_CODE_WIDTH_MAJOR   = 0x32    # Major axis of approaching ellipse
@@ -32,23 +32,22 @@ MTDEV_CODE_PRESSURE      = 0x3a    # Pressure on contact area
 MTDEV_CODE_ABS_X		 = 0x00
 MTDEV_CODE_ABS_Y		 = 0x01
 MTDEV_CODE_ABS_Z		 = 0x02
-MTDEV_CODE_BTN_DIGI		        = 0x140
-MTDEV_CODE_BTN_TOOL_PEN		    = 0x140
-MTDEV_CODE_BTN_TOOL_RUBBER		= 0x141
-MTDEV_CODE_BTN_TOOL_BRUSH		= 0x142
-MTDEV_CODE_BTN_TOOL_PENCIL		= 0x143
-MTDEV_CODE_BTN_TOOL_AIRBRUSH	= 0x144
-MTDEV_CODE_BTN_TOOL_FINGER		= 0x145
-MTDEV_CODE_BTN_TOOL_MOUSE		= 0x146
-MTDEV_CODE_BTN_TOOL_LENS		= 0x147
-MTDEV_CODE_BTN_TOUCH		    = 0x14a
-MTDEV_CODE_BTN_STYLUS		    = 0x14b
-MTDEV_CODE_BTN_STYLUS2		    = 0x14c
-MTDEV_CODE_BTN_TOOL_DOUBLETAP	= 0x14d
-MTDEV_CODE_BTN_TOOL_TRIPLETAP	= 0x14e
-MTDEV_CODE_BTN_TOOL_QUADTAP	    = 0x14f	# Four fingers on trackpad
+MTDEV_CODE_BTN_DIGI             = 0x140
+MTDEV_CODE_BTN_TOOL_PEN         = 0x140
+MTDEV_CODE_BTN_TOOL_RUBBER      = 0x141
+MTDEV_CODE_BTN_TOOL_BRUSH       = 0x142
+MTDEV_CODE_BTN_TOOL_PENCIL      = 0x143
+MTDEV_CODE_BTN_TOOL_AIRBRUSH    = 0x144
+MTDEV_CODE_BTN_TOOL_FINGER      = 0x145
+MTDEV_CODE_BTN_TOOL_MOUSE       = 0x146
+MTDEV_CODE_BTN_TOOL_LENS        = 0x147
+MTDEV_CODE_BTN_TOUCH            = 0x14a
+MTDEV_CODE_BTN_STYLUS           = 0x14b
+MTDEV_CODE_BTN_STYLUS2          = 0x14c
+MTDEV_CODE_BTN_TOOL_DOUBLETAP   = 0x14d
+MTDEV_CODE_BTN_TOOL_TRIPLETAP   = 0x14e
+MTDEV_CODE_BTN_TOOL_QUADTAP     = 0x14f	# Four fingers on trackpad
 
-MTDEV_TYPE_EV_ABS        = 0x03
 MTDEV_TYPE_EV_SYN        = 0x00
 MTDEV_TYPE_EV_KEY        = 0x01
 MTDEV_TYPE_EV_REL        = 0x02
@@ -146,7 +145,7 @@ class Device:
 
     def idle(self, ms):
         '''Check state of kernel device
-        
+
         :Parameters:
             `ms` : int
                 Number of milliseconds to wait for activity
@@ -158,7 +157,6 @@ class Device:
         if self._fd == -1:
             raise Exception('Device closed')
         return bool(mtdev_idle(pointer(self._device), self._fd, ms))
-
 
     def get(self):
         if self._fd == -1:
@@ -221,5 +219,3 @@ class Device:
         if index < 0 or index >= MTDEV_ABS_SIZE:
             raise IndexError('Invalid index')
         return self._device.caps.abs[index]
-
-
